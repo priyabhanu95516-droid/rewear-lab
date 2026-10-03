@@ -3,6 +3,8 @@
  <head>
   <meta charset="utf-8"/>
   <meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
+  <meta name="description" content="ReWear Lab: a concept website that uses AI-style ideas to give old clothes a second life."/>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Ctext y=%27.9em%27 font-size=%2790%27%3E%F0%9F%8C%BF%3C/text%3E%3C/svg%3E"/>
   <title>
    ReWear Lab - Give Your Clothes a Second Life
   </title>
@@ -11,11 +13,11 @@
  </head>
  <body>
   <header>
-   <nav>
+   <nav aria-label="Main">
     <a class="logo" href="#top">
      🌿 ReWear Lab
     </a>
-    <ul>
+    <ul id="menu">
      <li>
       <a href="#top">
        Home
@@ -47,12 +49,9 @@
       </a>
      </li>
     </ul>
-    <a class="btn s" href="#lab">
-     Start Now
-    </a>
-    <span aria-hidden="true" style="font-size:17px">
-     🔍
-    </span>
+    <a class="btn s" href="#lab">Start Now</a>
+    <button class="icon-btn" id="searchBtn" type="button" aria-label="Search ideas">🔍</button>
+    <button class="icon-btn burger" id="burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="menu">☰</button>
    </nav>
   </header>
   <main id="top">
@@ -122,9 +121,7 @@
        <p>
         Upload a photo of your old clothes and let our AI suggest creative upcycling ideas.
        </p>
-       <a class="btn s" href="#ideas" style="margin-top:16px">
-        Try It Now →
-       </a>
+       <button class="btn s" id="tryBtn" type="button" style="margin-top:16px">Try It Now →</button>
       </div>
       <div class="ba">
        <img alt="Your old denim jacket" src="images/style-lab-before.jpg"/>
@@ -183,12 +180,10 @@
         Get inspired with AI-powered ideas for your old clothes.
        </p>
       </div>
-      <a href="#ideas" style="font-weight:700;font-size:14px">
-       View All Ideas →
-      </a>
+      <a href="#ideas" id="viewAll" style="font-weight:700;font-size:14px">View All Ideas →</a>
      </div>
      <div class="cards">
-      <div class="c">
+      <div class="c" data-idea="crop" role="button" tabindex="0">
        <div class="t">
         <img alt="" src="images/idea-denim-crop-top.jpg"/>
        </div>
@@ -201,7 +196,7 @@
         </p>
        </div>
       </div>
-      <div class="c">
+      <div class="c" data-idea="tote" role="button" tabindex="0">
        <div class="t">
         <img alt="" src="images/idea-jeans-tote-bag.jpg"/>
        </div>
@@ -214,7 +209,7 @@
         </p>
        </div>
       </div>
-      <div class="c">
+      <div class="c" data-idea="cushion" role="button" tabindex="0">
        <div class="t">
         <img alt="" src="images/idea-shirt-cushion.jpg"/>
        </div>
@@ -227,7 +222,7 @@
         </p>
        </div>
       </div>
-      <div class="c">
+      <div class="c" data-idea="dress" role="button" tabindex="0">
        <div class="t">
         <img alt="" src="images/idea-kurta-dress.jpg"/>
        </div>
@@ -240,7 +235,7 @@
         </p>
        </div>
       </div>
-      <div class="c">
+      <div class="c" data-idea="scrunchie" role="button" tabindex="0">
        <div class="t">
         <img alt="" src="images/idea-scrunchies.jpg"/>
        </div>
@@ -269,9 +264,7 @@
       <p>
        Take part in monthly upcycling challenges, share your creations and get inspired by a community that cares.
       </p>
-      <a class="btn s" href="#contact">
-       View Challenges →
-      </a>
+      <button class="btn s" id="chBtn" type="button">View Challenges →</button>
      </div>
      <img alt="Real people, real ideas, bigger impact" src="images/community-polaroids.jpg"/>
     </div>
@@ -418,9 +411,7 @@
         <p>
          Because every piece of clothing has a story to tell.
         </p>
-        <a class="btn s" href="#contact">
-         Our Story →
-        </a>
+        <button class="btn s" id="storyBtn" type="button">Our Story →</button>
        </div>
        <img alt="Clothes on a rack" src="images/about-clothes-rack.jpg"/>
       </div>
@@ -440,31 +431,24 @@
        We'd love to hear from you! Whether you have a question, feedback or a collaboration idea, drop us a message.
       </p>
       <p class="soc">
-       <span>
-        ✉️ hello@rewearlab.com
-       </span>
+       <a href="mailto:hello@rewearlab.com">✉️ hello@rewearlab.com</a>
        <span>
         📍 India
        </span>
-       <i>
-        📷
-       </i>
-       <i>
-        in
-       </i>
-       <i>
-        𝕏
-       </i>
+       <a class="ic" href="https://www.instagram.com/" target="_blank" rel="noopener" aria-label="Instagram">📷</a>
+       <a class="ic" href="https://www.linkedin.com/" target="_blank" rel="noopener" aria-label="LinkedIn">in</a>
+       <a class="ic" href="https://x.com/" target="_blank" rel="noopener" aria-label="X">𝕏</a>
       </p>
      </div>
-     <form id="f">
-      <input aria-label="Name" placeholder="Name" required=""/>
-      <textarea aria-label="Message" placeholder="Message" required="" rows="5"></textarea>
+     <form id="f" novalidate>
+      <input aria-label="Name" name="name" autocomplete="name" placeholder="Name" required=""/>
+      <textarea aria-label="Message" name="message" placeholder="Message" required="" rows="5"></textarea>
       <div>
        <button class="btn s" type="submit">
         Send Message →
        </button>
       </div>
+      <div class="err" id="err" role="alert"></div>
       <div class="ok" id="ok" role="status">
        Thanks! This is a concept form, so nothing was sent.
       </div>
@@ -486,9 +470,7 @@
      <b>
       🌿 ReWear Lab
      </b>
-     <span>
-      Home · About · Services · Ideas · Community · Contact
-     </span>
+     <span class="fl"><a href="#top">Home</a> · <a href="#about">About</a> · <a href="#lab">Services</a> · <a href="#ideas">Ideas</a> · <a href="#community">Community</a> · <a href="#contact">Contact</a></span>
      <span>
       Together for a Greener Tomorrow
      </span>
@@ -498,8 +480,11 @@
     Concept website created with AI for the InAmigos Foundation task.
    </p>
   </main>
-  <script src="js/script.js">
-  </script>
+  <dialog id="dlg" aria-labelledby="dtitle">
+   <button class="x" id="dclose" type="button" aria-label="Close">×</button>
+   <div id="dbody"></div>
+  </dialog>
+  <script src="js/script.js"></script>
  </body>
 </html>
 
